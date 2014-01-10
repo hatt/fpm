@@ -353,9 +353,7 @@ class FPM::Package::RPM < FPM::Package
         allconfigs << p.gsub("#{staging_path}/", '') if File.file? p
       end
     end
-    allconfigs.sort!.uniq!
-
-    self.config_files = allconfigs.map { |x| File.join(self.prefix, x) }
+    self.config_files = allconfigs.sort!.uniq!
 
     (attributes[:rpm_rpmbuild_define] or []).each do |define|
       args += ["--define", define]
